@@ -1,26 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XSS CTF Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #5a5a5a;
+        }
+
+        input[type="text"] {
+            width: 75%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #secret-flag {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the XSS Challenge</h1>
-    <p>Type something in the box and see it reflected below:</p>
-    <form action="/test" method="GET">
-        <input type="text" name="input" placeholder="Enter your text here">
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1>Welcome to the XSS Challenge</h1>
+        <p>Type something in the box and see it reflected below:</p>
+        <form action="/" method="GET">
+            <input type="text" name="input" placeholder="Enter your text here">
+            <button type="submit">Submit</button>
+        </form>
 
-    <script>
-        // Extracting the 'input' parameter from the URL
-        const params = new URLSearchParams(window.location.search);
-        const userInput = params.get('input');
+        <div id="secret-flag">
+            CTF{hidden_xss_flag}
+        </div>
 
-        if (userInput) {
-            // Reflecting the user input directly into the page
-            // This is the vulnerable part, as it doesn't sanitize the input
-            document.write('<h2>Your Input:</h2><p>' + userInput + '</p>');
-        }
-    </script>
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const userInput = params.get('input');
+            if (userInput) {
+                document.write('<h2>Your Input:</h2><p>' + userInput + '</p>');
+            }
+        </script>
+    </div>
 </body>
 </html>

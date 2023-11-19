@@ -3,37 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Modern Web</title>
+    <title>Modern Shop - Search</title>
     <style>
-        /* [Styling similar to the previous example] */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        input[type="search"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <button onclick="registerUser()">Register</button>
-        <p id="welcome-message"></p>
+        <h1>Welcome to Modern Shop</h1>
+        <input type="search" id="product-search" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+        <div id="search-results"></div>
     </div>
 
     <script>
-        function registerUser() {
-            var username = document.getElementById('username').value;
-            var email = document.getElementById('email').value;
-
-            if (username === '' || email === '') {
-                alert('Username and Email are required!');
-                return;
-            }
-
-            // Subtle Vulnerability: Using user input in a dynamically loaded script tag
-            var script = document.createElement('script');
-            script.src = 'https://example.com/welcome.js?user=' + encodeURIComponent(username);
-            document.body.appendChild(script);
-
-            // The external script uses the 'user' parameter to display a welcome message.
-            // An attacker could potentially host a malicious script and use the src attribute to point to it.
+        function searchProducts() {
+            var searchQuery = document.getElementById('product-search').value;
+            
+            // Simulate a search result display (vulnerable part)
+            var results = "Searching for: <b>" + searchQuery + "</b>";
+            
+            // Vulnerability: The search query is inserted into innerHTML without proper sanitization
+            document.getElementById('search-results').innerHTML = results;
         }
     </script>
 </body>

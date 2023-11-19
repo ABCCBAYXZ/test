@@ -1,4 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XSS CTF Challenge</title>
+</head>
+<body>
+    <h1>Welcome to the XSS Challenge</h1>
+    <p>Type something in the box and see it reflected below:</p>
+    <form action="/" method="GET">
+        <input type="text" name="input" placeholder="Enter your text here">
+        <button type="submit">Submit</button>
+    </form>
 
-HTML test
-</b>
-<h1>HELLO</h1>
+    <script>
+        // Extracting the 'input' parameter from the URL
+        const params = new URLSearchParams(window.location.search);
+        const userInput = params.get('input');
+
+        if (userInput) {
+            // Reflecting the user input directly into the page
+            // This is the vulnerable part, as it doesn't sanitize the input
+            document.write('<h2>Your Input:</h2><p>' + userInput + '</p>');
+        }
+    </script>
+</body>
+</html>

@@ -3,35 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XSS CTF Challenge</title>
+    <title>Mock Store - XSS Challenge</title>
     <style>
+        /* Basic CSS for styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
             padding: 20px;
-            color: #333;
         }
-
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: auto;
             background: white;
             padding: 20px;
-            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         }
-
-        h1 {
-            color: #5a5a5a;
-        }
-
-        input[type="text"] {
-            width: 75%;
-            padding: 10px;
+        input[type="text"], input[type="search"], textarea {
+            width: 100%;
+            padding: 8px;
             margin: 10px 0;
             border: 1px solid #ddd;
         }
-
         button {
             padding: 10px 20px;
             background-color: #007bff;
@@ -39,34 +31,46 @@
             border: none;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #0056b3;
-        }
-
-        #secret-flag {
-            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the XSS Challenge</h1>
-        <p>Type something in the box and see it reflected below:</p>
-        <form action="/test" method="GET">
-            <input type="text" name="input" placeholder="Enter your text here">
-            <button type="submit">Submit</button>
-        </form>
+        <h1>Welcome to Mock Store</h1>
 
-        <div id="secret-flag">
-            CTF{hidden_xss_flag}
-        </div>
+        <h2>Product Search</h2>
+        <input type="search" id="product-search" placeholder="Search for products...">
+        <button onclick="searchProduct()">Search</button>
+
+        <h2>Leave a Review</h2>
+        <textarea id="review-input" placeholder="Write your review..."></textarea>
+        <button onclick="submitReview()">Submit Review</button>
+
+        <h2>Contact Us</h2>
+        <input type="text" id="contact-name" placeholder="Your name">
+        <input type="text" id="contact-message" placeholder="Your message">
+        <button onclick="sendMessage()">Send Message</button>
 
         <script>
-            const params = new URLSearchParams(window.location.search);
-            const userInput = params.get('input');
-            if (userInput) {
-                document.write('<h2>Your Input:</h2><p>' + userInput + '</p>');
+            function searchProduct() {
+                // Safe: Encoded output
+                var search = document.getElementById('product-search').value;
+                alert('Search for: ' + encodeURIComponent(search));
+            }
+
+            function submitReview() {
+                // Vulnerable: Reflected XSS
+                var review = document.getElementById('review-input').value;
+                document.write('<h3>Your Review:</h3><p>' + review + '</p>');
+            }
+
+            function sendMessage() {
+                // Safe: No output reflection
+                var name = document.getElementById('contact-name').value;
+                var message = document.getElementById('contact-message').value;
+                alert('Thank you for your message, ' + encodeURIComponent(name) + '!');
             }
         </script>
     </div>

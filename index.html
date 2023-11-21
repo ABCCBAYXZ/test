@@ -63,13 +63,13 @@
         }
 
         function nextLevel() {
-            window.location.href = 'nextLevel.html'; // URL to the next level
+            window.location.href = 'level2.html'; // URL to the next level
         }
         // Overriding the default alert function to detect when an alert is triggered
         var originalAlert = window.alert;
         window.alert = function(message) {
-            originalAlert(message);
             document.getElementById('nextButton').style.display = 'block';
+            originalAlert(message);
         };
     </script>
 

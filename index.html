@@ -48,8 +48,6 @@
         <button onclick="searchProducts()">Suche</button>
         <div id="search-results"></div>
     </div>
-
-     <button id="nextButton" style="display:none;" onclick="nextLevel()">Next Level</button>
     
     <script>
         function searchProducts() {
@@ -65,14 +63,13 @@
         function nextLevel() {
             window.location.href = 'level2.html'; // URL to the next level
         }
+
         // Overriding the default alert function to detect when an alert is triggered
         var originalAlert = window.alert;
         window.alert = function(message) {
             document.getElementById('nextButton').style.display = 'block';
-            originalAlert(message);
+            originalAlert("Geschafft! Drücke OK zum fortfahren");
         };
     </script>
-
-     
 </body>
 </html>

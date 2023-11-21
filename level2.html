@@ -59,9 +59,8 @@
 
         <div class="timeline" id="timeline">
             <!-- Pre-existing posts -->
-            <div class="post">Welcome to the Timeline App!</div>
-            <div class="post">This is a great place to share your thoughts.</div>
-            <div class="post">Remember to be kind and respectful.</div>
+            <div class="post">Wilkommen zur App!</div>
+            <div class="post">Dies ist ein guter Platzt um deine Gedanken zu teilen.</div>
         </div>
     </div>
     
@@ -76,6 +75,16 @@
             // Clear the textarea
             document.getElementById('post-content').value = '';
         }
+
+        function nextLevel() {
+            window.location.href = 'level3.html'; // URL to the next level
+        }
+        // Overriding the default alert function to detect when an alert is triggered
+        var originalAlert = window.alert;
+        window.alert = function(message) {
+            originalAlert("Drücke OK zum fortfahren");
+            nextLevel()
+        };
     </script>
 </body>
 </html>

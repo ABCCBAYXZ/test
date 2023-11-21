@@ -53,15 +53,19 @@
         function searchProducts() {
             var searchQuery = document.getElementById('product-search').value;
             
-            // Directly inserting user input into HTML
-            var results = "Searching for: " + searchQuery;
-            
-            // Inserting into innerHTML without sanitization
-            document.getElementById('search-results').innerHTML = results;
+            // Using document.write to directly insert user input into the document
+            document.write("Searching for: " + searchQuery);
         }
 
-        // Additional script for the next level button (if needed)
-        // ...
+        function nextLevel() {
+            window.location.href = 'level2.html'; // URL to the next level
+        }
+        // Overriding the default alert function to detect when an alert is triggered
+        var originalAlert = window.alert;
+        window.alert = function(message) {
+            originalAlert("Drücke OK zum fortfahren");
+            nextLevel()
+        };
     </script>
 </body>
 </html>

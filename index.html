@@ -49,6 +49,8 @@
         <div id="search-results"></div>
     </div>
 
+     <button id="nextButton" style="display:none;" onclick="nextLevel()">Next Level</button>
+    
     <script>
         function searchProducts() {
             var searchQuery = document.getElementById('product-search').value;
@@ -59,6 +61,24 @@
             // Vulnerability: The search query is inserted into innerHTML without proper sanitization
             document.getElementById('search-results').innerHTML = results;
         }
+
+        function nextLevel() {
+            window.location.href = 'nextLevel.html'; // URL to the next level
+        }
+
+        window.addEventListener('alert', function() {
+            document.getElementById('nextButton').style.display = 'block';
+        });
+
+        // Overriding the default alert function to detect when an alert is triggered
+        var originalAlert = window.alert;
+        window.alert = function(message) {
+            originalAlert(message);
+            var event = new Event('alert');
+            window.dispatchEvent(event);
+        };
     </script>
+
+     
 </body>
 </html>

@@ -65,17 +65,11 @@
         function nextLevel() {
             window.location.href = 'nextLevel.html'; // URL to the next level
         }
-
-        window.addEventListener('alert', function() {
-            document.getElementById('nextButton').style.display = 'block';
-        });
-
         // Overriding the default alert function to detect when an alert is triggered
         var originalAlert = window.alert;
         window.alert = function(message) {
             originalAlert(message);
-            var event = new Event('alert');
-            window.dispatchEvent(event);
+            document.getElementById('nextButton').style.display = 'block';
         };
     </script>
 

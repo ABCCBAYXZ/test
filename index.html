@@ -48,28 +48,20 @@
         <button onclick="searchProducts()">Suche</button>
         <div id="search-results"></div>
     </div>
-    
+
     <script>
         function searchProducts() {
             var searchQuery = document.getElementById('product-search').value;
             
-            // Simulate a search result display (vulnerable part)
-            var results = "Searching for: <b>" + searchQuery + "</b>";
+            // Directly inserting user input into HTML
+            var results = "Searching for: " + searchQuery;
             
-            // Vulnerability: The search query is inserted into innerHTML without proper sanitization
+            // Inserting into innerHTML without sanitization
             document.getElementById('search-results').innerHTML = results;
         }
 
-        function nextLevel() {
-            window.location.href = 'level2.html'; // URL to the next level
-        }
-
-        // Overriding the default alert function to detect when an alert is triggered
-        var originalAlert = window.alert;
-        window.alert = function(message) {
-            document.getElementById('nextButton').style.display = 'block';
-            originalAlert("Geschafft! Drücke OK zum fortfahren");
-        };
+        // Additional script for the next level button (if needed)
+        // ...
     </script>
 </body>
 </html>

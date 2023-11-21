@@ -53,8 +53,11 @@
         function searchProducts() {
             var searchQuery = document.getElementById('product-search').value;
             
-            // Using document.write to directly insert user input into the document
-            document.write("Searching for: " + searchQuery);
+            // Directly inserting user input into HTML
+            var results = "Searching for: " + searchQuery;
+            
+            // Inserting into innerHTML without sanitization
+            document.getElementById('search-results').innerHTML = results;
         }
 
         function nextLevel() {

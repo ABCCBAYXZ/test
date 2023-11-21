@@ -54,12 +54,17 @@
 <body>
     <div class="container">
         <h1>Timeline App</h1>
-        <textarea id="post-content" placeholder="Write something..."></textarea>
+        <textarea id="post-content" placeholder="Schreibe dein Post..."></textarea>
         <button onclick="postToTimeline()">Post</button>
 
-        <div class="timeline" id="timeline"></div>
+        <div class="timeline" id="timeline">
+            <!-- Pre-existing posts -->
+            <div class="post">Welcome to the Timeline App!</div>
+            <div class="post">This is a great place to share your thoughts.</div>
+            <div class="post">Remember to be kind and respectful.</div>
+        </div>
     </div>
-
+    
     <script>
         function postToTimeline() {
             var content = document.getElementById('post-content').value;
